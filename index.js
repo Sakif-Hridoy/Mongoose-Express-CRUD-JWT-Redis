@@ -1,5 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const todoRouters = require("./routers/todoRouters")
+
 
 const app = express();
 app.use(express.json());
@@ -15,9 +17,8 @@ function errorHandler(err,req,res,next){
     res.status(500).json({error:err})
 }
 
-app.get('/',(req,res)=>{
-res.send("This is Home")
-})
+app.use('/todo',todoRouters);
+
 
 app.listen(3000,()=>{
     console.log("app is listening on port 3000")
