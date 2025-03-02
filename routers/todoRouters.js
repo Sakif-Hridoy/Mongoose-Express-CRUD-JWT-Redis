@@ -20,7 +20,15 @@ router.post("/", async (req, res) => {
 });
 
 
-router.post("/all",async(req,res)=>{})
+router.post("/all", async (req, res) => {
+    try {
+        await Todo.insertMany(req.body); // ✅ No callback
+        res.status(200).json({ message: "Multiple todos were inserted successfully!" });
+    } catch (err) {
+        res.status(500).json({ error: "There was a server error", details: err.message });
+    }
+});
+
 
 router.put("/:id",async(req,res)=>{})
 
